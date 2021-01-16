@@ -6,25 +6,26 @@ const {
   deleteArticle,
 } = require("../controllers/Articles");
 
-const standardJoiValidation = Joi.string().required();
-const urlJoiValidation = Joi.string()
+const JOI_STRING_REQ_VALID = Joi.string().required();
+const JOI_URL_VALID = Joi.string()
   .required()
   .pattern(/^(http|https):\/\/[^ "]+$/);
 
 // Маршрут для карточек c новостями для получения
 router.get("/articles", getArticles);
 
+//Создать новость
 router.post(
   "/articles",
   celebrate({
     body: Joi.object().keys({
-      keyword: standardJoiValidation,
-      title: standardJoiValidation,
-      text: standardJoiValidation,
-      date: standardJoiValidation,
-      source: standardJoiValidation,
-      image: urlJoiValidation,
-      link: urlJoiValidation,
+      keyword: JOI_STRING_REQ_VALID,
+      title: JOI_STRING_REQ_VALID,
+      text: JOI_STRING_REQ_VALID,
+      date: JOI_STRING_REQ_VALID,
+      source: JOI_STRING_REQ_VALID,
+      image: JOI_URL_VALID,
+      link: JOI_URL_VALID,
     }),
   }),
   createArticle

@@ -15,6 +15,7 @@ const articlesSchema = new mongoose.Schema(
     image: { type: String, required: true, validate: validationFunction },
     link: {
       type: String,
+      required: true,
       validate: validationFunction,
     },
     owner: { type: ObjectId, default: [], required: true },

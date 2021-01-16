@@ -15,7 +15,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors());
-mongoose.connect("mongodb://localhost:27017/mestodb", {
+mongoose.connect("mongodb://localhost:27017/diplomabd", {
   useNewUrlParser: true,
   useFindAndModify: true,
   useCreateIndex: true,
