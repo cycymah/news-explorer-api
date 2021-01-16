@@ -1,0 +1,33 @@
+{
+  "name": "news-explorer-api",
+  "author": "Ivan Solnyshkin",
+  "description": "Project woking with node.js and express",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "celebrate": "^13.0.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-winston": "^4.0.5",
+    "joi": "^17.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.15",
+    "npm": "^6.14.11",
+    "validator": "^13.1.17",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.6"
+  }
+}
