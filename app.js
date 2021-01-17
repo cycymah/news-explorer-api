@@ -1,18 +1,20 @@
+require("dotenv").config();
+const helmet = require("helmet");
 const express = require("express");
 const bodyParser = require("body-parser");
+const limiter = require("./utils/rateLimiter");
 const { celebrate, Joi, errors } = require("celebrate");
 
-const mongoose = require("mongoose");
 const cors = require("cors");
-const { requestLogger, errorLogger } = require("./middlewares/logger");
-const usersRouter = require("./routers/user.js");
-const usersArticles = require("./routers/articles.js");
-const { login, createUser } = require("./controllers/User");
+const mongoose = require("mongoose");
+const { usersRouter, usersArticles } = require("./routers/index");
 const { autoriz } = require("./middlewares/auth");
 const NotFoundError = require("./error/NotFoundError.js");
+const { login, createUser } = require("./controllers/User");
+const { requestLogger, errorLogger } = require("./middlewares/logger");
 
 const app = express();
-const PORT = 3000;
+const { PORT = 3000 } = process.env;
 
 app.use(cors());
 mongoose.connect("mongodb://localhost:27017/diplomabd", {
@@ -22,6 +24,8 @@ mongoose.connect("mongodb://localhost:27017/diplomabd", {
   useUnifiedTopology: true,
 });
 
+app.use(helmet());
+app.use(limiter);
 app.use(bodyParser.json());
 app.use(requestLogger);
 
@@ -55,6 +59,7 @@ app.post(
 );
 
 app.use(autoriz);
+
 app.use("/", usersRouter);
 app.use("/", usersArticles);
 
