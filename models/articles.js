@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const { ObjectId } = require("mongodb");
+const mongoose = require('mongoose');
+const { ObjectId } = require('mongodb');
 
-const validatorUrl = require("validator");
+const validatorUrl = require('validator');
 
 const validationFunction = (str) => validatorUrl.isURL(str);
 
@@ -10,7 +10,7 @@ const articlesSchema = new mongoose.Schema(
     keyword: { type: String, required: true },
     title: { type: String, required: true },
     text: { type: String, required: true },
-    date: { type: Date, required: true },
+    date: { type: String, required: true },
     source: { type: String, required: true },
     image: { type: String, required: true, validate: validationFunction },
     link: {
@@ -18,11 +18,11 @@ const articlesSchema = new mongoose.Schema(
       required: true,
       validate: validationFunction,
     },
-    owner: { type: ObjectId, default: [], required: true },
+    owner: { type: ObjectId, required: true },
   },
   {
     versionKey: false,
-  }
+  },
 );
 
-module.exports = mongoose.model("article", articlesSchema);
+module.exports = mongoose.model('article', articlesSchema);

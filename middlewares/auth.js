@@ -1,23 +1,26 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
+const UnauthorizedError = require('../errors/UnauthorizedError');
+const { UNAUTHORIZED_ERROR_MESSAGE } = require('../utils/constants');
+const { DEV_SECRET } = require('../utils/config');
+
 const { NODE_ENV, JWT_SECRET } = process.env;
 
-// eslint-disable-next-line consistent-return
 module.exports.autoriz = (req, res, next) => {
   const { authorization } = req.headers;
 
-  if (!authorization || !authorization.startsWith("Bearer ")) {
-    return res.status(401).send({ message: "Нужно авторизироваться" });
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    throw new UnauthorizedError(UNAUTHORIZED_ERROR_MESSAGE);
   }
-  const token = authorization.replace("Bearer ", "");
+  const token = authorization.replace('Bearer ', '');
 
   let payload;
   try {
     payload = jwt.verify(
       token,
-      `${NODE_ENV === "production" ? JWT_SECRET : "dev-secret"}`
+      `${NODE_ENV === 'production' ? JWT_SECRET : DEV_SECRET}`,
     );
   } catch (err) {
-    return res.status(401).send({ message: "Нет атворизации" });
+    throw new UnauthorizedError(UNAUTHORIZED_ERROR_MESSAGE);
   }
   req.user = payload;
   next();

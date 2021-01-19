@@ -1,22 +1,23 @@
-const router = require("express").Router();
-const { celebrate, Joi } = require("celebrate");
+const router = require('express').Router();
+const { celebrate, Joi } = require('celebrate');
 const {
   getArticles,
   createArticle,
   deleteArticle,
-} = require("../controllers/Articles");
+} = require('../controllers/Articles');
+const { URL_REGEXP } = require('../utils/constants');
 
 const JOI_STRING_REQ_VALID = Joi.string().required();
 const JOI_URL_VALID = Joi.string()
   .required()
-  .pattern(/^(http|https):\/\/[^ "]+$/);
+  .pattern(URL_REGEXP);
 
 // Маршрут для карточек c новостями для получения
-router.get("/articles", getArticles);
+router.get('/articles', getArticles);
 
-//Создать новость
+// Создать новость
 router.post(
-  "/articles",
+  '/articles',
   celebrate({
     body: Joi.object().keys({
       keyword: JOI_STRING_REQ_VALID,
@@ -28,17 +29,17 @@ router.post(
       link: JOI_URL_VALID,
     }),
   }),
-  createArticle
+  createArticle,
 );
 
 router.delete(
-  "/articles/:id",
+  '/articles/:id',
   celebrate({
     params: Joi.object().keys({
       id: Joi.string().hex().length(24),
     }),
   }),
-  deleteArticle
+  deleteArticle,
 );
 
 module.exports = router;

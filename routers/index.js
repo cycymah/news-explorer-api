@@ -1,4 +1,8 @@
-const usersArticles = require("./articles");
-const usersRouter = require("./user");
+const combineRoutes = require('express').Router();
+const articlesRouter = require('./articles');
+const usersRouter = require('./user');
 
-module.exports = { usersArticles, usersRouter };
+combineRoutes.use(usersRouter);
+combineRoutes.use(articlesRouter);
+
+module.exports = combineRoutes;
