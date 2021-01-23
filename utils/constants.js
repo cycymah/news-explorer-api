@@ -6,11 +6,13 @@ const NOT_FOUND_USER = { message: 'Пользователь не найден' }
 const ALREADY_EXIST_USER = { message: 'Такой пользователь уже существует' };
 const WRONG_LOGIN_DATA = { message: 'Неправильные логин или пароль' };
 const NOT_FOUND = { message: 'Запрашиваемый ресурс не найден' };
+const WRONG_URL = { message: 'Неверная ссылка' };
 
 const EXPIRES_IN = '7d';
-const URL_REGEXP = /^https?:\/\/[a-z0-9\W\_^@]+#?$/i;
+const URL_REGEXP = /^https?:\/\/[a-z0-9\W_^@]+#?$/i;
 
 module.exports = {
+  WRONG_URL,
   NOT_FOUND,
   URL_REGEXP,
   EXPIRES_IN,
