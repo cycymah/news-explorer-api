@@ -7,11 +7,13 @@ const ALREADY_EXIST_USER = { message: 'Такой пользователь уж�
 const WRONG_LOGIN_DATA = { message: 'Неправильные логин или пароль' };
 const NOT_FOUND = { message: 'Запрашиваемый ресурс не найден' };
 const WRONG_URL = { message: 'Неверная ссылка' };
+const WRONG_EMAIL = { message: 'Ошибка валидации email' };
 
 const EXPIRES_IN = '7d';
 const URL_REGEXP = /^https?:\/\/[a-z0-9\W_^@]+#?$/i;
 
 module.exports = {
+  WRONG_EMAIL,
   WRONG_URL,
   NOT_FOUND,
   URL_REGEXP,

@@ -3,19 +3,19 @@ const bcrypt = require('bcryptjs');
 
 const isEmail = require('validator/lib/isEmail');
 const UnauthorizedError = require('../errors/UnauthorizedError');
-const { WRONG_LOGIN_DATA } = require('../utils/constants');
+const { WRONG_LOGIN_DATA, WRONG_EMAIL } = require('../utils/constants');
 
 const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      min: 2,
-      max: 30,
+      minLength: 2,
+      maxLength: 30,
       require: true,
     },
     password: {
       type: String,
-      min: 8,
+      minLength: 8,
       required: true,
       select: false,
     },
@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema(
         validator(v) {
           return isEmail(v);
         },
-        message: 'Ошибка валидации email',
+        message: WRONG_EMAIL,
       },
       min: 5,
       unique: true,
